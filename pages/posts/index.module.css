@@ -1,0 +1,72 @@
+.img1 {
+  width: 99.1vw;
+}
+
+.h1 {
+  color: #bfd72e;
+  text-align: center;
+  margin-top: 5vw;
+}
+
+.ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  list-style: none;
+  margin-top: 5vw;
+  width: 55%;
+  margin: auto;
+}
+
+.ul li {
+  font-weight: bold;
+  color: #bfd72e;
+  font-size: larger;
+  margin-top: 2vw;
+}
+
+.last_container {
+  width: 62%;
+  height: fit-content;
+  color: black;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  margin-top: 5vw;
+  margin-bottom: 5vw;
+  flex-direction: column;
+}
+
+/* * Remove extra left and right margins, due to padding */
+.card {
+  display: grid;
+  grid-column-gap: 1vw;
+  grid-row-gap: 2vw;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+
+.button_container {
+  display: grid;
+  width: 100%;
+  height: 5em;
+  text-align: center;
+  grid-column-gap: 25vw;
+  grid-template-columns: auto auto;
+  padding: 10px;
+}
+
+.button_container button {
+  border-radius: 20px;
+  border-color: transparent;
+  background-color: #bed62e;
+  color: white;
+  font-size: larger;
+  font-weight: bold;
+  box-shadow: 0 0.1vw 0.31vw #000;
+  cursor: pointer;
+}
+
+.button_container button:hover {
+  transform: translateY(-0.1em);
+}

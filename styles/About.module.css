@@ -1,0 +1,39 @@
+.img {
+  width: 99.1vw;
+}
+
+.h1 {
+  color: #bfd72e;
+  text-align: center;
+  margin-top: 4vw;
+}
+
+.img_2 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  margin-top: 5vw;
+}
+
+.p {
+  text-align: center;
+  margin-top: 4vw;
+  width: 20vw;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+  font-size: larger;
+}
+
+.img_3 {
+  width: 99.1vw;
+  margin-top: 5vw;
+}
+
+@media (max-width: 1200px) {
+  .p {
+    width: 80%;
+  }
+}

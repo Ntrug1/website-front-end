@@ -1,0 +1,44 @@
+.footer {
+  margin-top: auto;
+  width: 100%;
+  height: fit-content;
+  background-color: #2f2f2f;
+  color: aliceblue;
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 10px;
+}
+.container {
+  display: flex;
+  width: 80%;
+  margin: auto;
+}
+
+.footer img {
+  height: 70%;
+  width: 13%;
+  margin-left: 10rem;
+  margin-top: 1em;
+}
+
+.footer ul {
+  width: fit-content;
+  display: flex;
+  align-items: left;
+  list-style: none;
+  flex-direction: column;
+}
+
+.footer li {
+  font-size: small;
+}
+
+@media (max-width: 1200px) {
+  .footer li {
+    font-size: 0.5rem;
+  }
+
+  .footer img {
+    width: 20%;
+  }
+}

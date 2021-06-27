@@ -1,0 +1,57 @@
+.img1 {
+  width: 99.1vw;
+}
+
+.contact h1 {
+  color: #bfd72e;
+  margin-top: 5vw;
+}
+
+.img2 {
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  width: 62%;
+  margin: auto;
+  height: fit-content;
+}
+
+.container1 {
+  width: 30vw;
+}
+
+.container2 {
+  margin-left: 5%;
+}
+
+.container2 ul {
+  width: fit-content;
+  display: flex;
+  align-items: left;
+  list-style: none;
+  flex-direction: column;
+  padding: 0%;
+}
+
+.container2 li {
+  font-size: medium;
+  float: left;
+}
+
+@media (max-width: 1200px) {
+  .contact h1 {
+    font-size: 2rem;
+  }
+
+  .row {
+    margin: 0;
+    width: 100%;
+    margin-left: 2vw;
+  }
+
+  .container1 {
+    width: 45vw;
+  }
+}

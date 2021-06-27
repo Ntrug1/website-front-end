@@ -1,0 +1,44 @@
+.nav {
+  height: 172px;
+  background: white;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 68%;
+  margin: auto;
+  margin-top: 1vw;
+}
+
+.img {
+  height: 10vw;
+  width: 10vw;
+  margin-left: 1.8vw;
+}
+
+.nav ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+.nav li {
+  font-weight: bold;
+  margin-left: 3.125vw;
+  font-size: 1.45rem;
+}
+
+.active {
+  color: #0070bb;
+}
+
+@media (max-width: 1200px) {
+  .nav {
+    margin-left: 2vw;
+    width: 100%;
+  }
+
+  .nav ul {
+    padding: 0;
+  }
+}

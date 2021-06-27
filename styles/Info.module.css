@@ -1,0 +1,36 @@
+.nav {
+  height: 67px;
+  padding-left: 18.5vw;
+  background: #0070bb;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.nav p {
+  margin-left: 10px;
+  font-size: larger;
+}
+
+.button {
+  width: 8vw;
+  background-color: #bfd72e;
+  color: white;
+  border-radius: 10px;
+  border: transparent;
+  font-size: 20px;
+  padding: 0.5vw;
+  margin-left: 25vw;
+  cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+  .button {
+    margin-left: 24vw;
+  }
+
+  .nav {
+    padding-left: 5vw;
+  }
+}
