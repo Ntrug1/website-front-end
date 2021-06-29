@@ -14,7 +14,7 @@ export default function Post({post}){
 
     openGraph: {
     title: `Hoa My | ${post.Title}`,
-    description: post.title,
+    description: post.Title,
     }
   }
 
@@ -43,6 +43,7 @@ export default function Post({post}){
 const {publicRuntimeConfig} = getConfig()
 
 export async function getServerSideProps(context) {
+  console.log(context)
   const {slug} = context.query
   const res = await fetch(`${publicRuntimeConfig.API_URL}/posts?Slug=${slug}`)
   const data = await res.json()
