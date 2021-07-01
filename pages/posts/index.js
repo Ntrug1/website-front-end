@@ -33,12 +33,15 @@ export default function PostsPage({postList, page, numbofPosts}){
 
 export async function getServerSideProps({query: {page = 1}}){
   console.log(page)
+
+  const { API_URL } = process.env
+
   const start = +page === 1 ? 0 : (+page - 1) * 6;
 
-  const numbOfPostRes = await fetch(`http://localhost:1337/posts/count`);
+  const numbOfPostRes = await fetch(`${API_URL}/posts/count`);
   const numbofPosts = await numbOfPostRes.json();
 
-  const res = await fetch(`http://localhost:1337/posts?_limit=6&_start=${start}`);
+  const res = await fetch(`${API_URL}/posts?_limit=6&_start=${start}`);
   const allPosts = await res.json();
   return{
     props:{

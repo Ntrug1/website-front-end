@@ -29,7 +29,7 @@ export default function Post({post}){
       <div className={Style.content}>
         <p dangerouslySetInnerHTML={{ __html: post.Content}}></p>
         {post.Image && (
-          <img className={Style.image} src={API_URL + post.Image.url}/>
+          <img className={Style.image} src={post.Image[0].url}/>
         )}
       </div>
     </div>
@@ -44,6 +44,7 @@ const {publicRuntimeConfig} = getConfig()
 
 export async function getServerSideProps(context) {
   console.log(context)
+
   const {slug} = context.query
   const res = await fetch(`${publicRuntimeConfig.API_URL}/posts?Slug=${slug}`)
   const data = await res.json()

@@ -3,13 +3,15 @@ import Link from 'next/link'
 
 export default function Card({post}){
   
-  const { API_URL } = process.env
+  // console.log(post)
+
+  // console.log(post.Image[0].url)
 
   return (
     <Link href="/posts/[slug]" as={`/posts/${post.Slug}`}>
     <div className={styled.card}>
       {post.Image && (
-        <img className={styled.image} src={API_URL + post.Image.url}/>
+        <img className={styled.image} src={post.Image[0].url}/>
       )}
       <div className={styled.body}>
         <h3 className={styled.h3}>{ post.Title }</h3>
