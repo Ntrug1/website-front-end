@@ -3,7 +3,7 @@ import SimpleCarousel from '../components/Slider'
 import Cards from '../components/Cards'
 
 export default function Home({posts}) {
-  console.log(posts)
+  // console.log(posts)
   return (
     <div>
       <SimpleCarousel/>
