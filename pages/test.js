@@ -2,6 +2,7 @@ import { getSession, signIn, signOut } from "next-auth/client";
 import Head from 'next/head';
 import Link from "next/link";
 import React from "react";
+import Style from '../styles/Login.module.css'
 
 const IndexPage = ({
   session,
@@ -14,7 +15,7 @@ const IndexPage = ({
     return (
       <div>
         <Link href="/api/auth/signin">
-          <button
+          <button className={Style.button} 
             onClick={(e) => {
               e.preventDefault();
               signIn();
@@ -35,7 +36,7 @@ const IndexPage = ({
     return (
       <div>
         <Link href="/api/auth/signout">
-          <button
+          <button className={Style.button} 
             onClick={(e) => {
               e.preventDefault();
               signOut();
@@ -51,13 +52,24 @@ const IndexPage = ({
   if (!session) {
     return (
       <div className="hero">
-        <div className="navbar">
+      <Head>
+        <title>Sign in</title>
+      </Head>
+        <h2 className={Style.h2}>Sign In</h2>
+        <form>
+          <div>
+            <h2>Email: </h2>
+            <input className={Style.input} type="email" />
+          </div>
+          <div>
+            <h2>Password: </h2>
+            <input className={Style.input}type="password" /><br/>
+          </div>
+          <div className="navbar">
           {signOutButtonNode()}
           {signInButtonNode()}
-        </div>
-        <div className="text">
-          You aren't authorized to view this page
-        </div>
+        </div><br/>
+        </form>
       </div>
     )
   }
@@ -65,14 +77,17 @@ const IndexPage = ({
   return (
     <div className="hero">
       <Head>
-        <title>Index Page</title>
+        <title>Add Post</title>
       </Head>
+      <h2>Add Post</h2>
+      <form>
+        <input className={Style.input} type="text" /><br/>
+        <input className={Style.input} type="text" /><br/>
+        <button className={Style.button}  type="button">Add Post</button>
+      </form>
       <div className="navbar">
         {signOutButtonNode()}
         {signInButtonNode()}
-      </div>
-      <div className="text">
-        Hello world
       </div>
     </div>
   );
