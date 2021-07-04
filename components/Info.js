@@ -5,8 +5,8 @@ function Info(){
     <nav className={Style.nav}>
       <p>Phone number: 0936565681</p>
       <p>Email: something@gmail.com</p>
-      <Link href='/add-posts'>
-        <button className={Style.button}>Sign In</button>
+      <Link href='/test'>
+        <button className={Style.button}>Upload</button>
       </Link>
     </nav>
   )

@@ -12,7 +12,7 @@ export default function Home({posts}) {
         <div className={HomeStyle.container_up}>
           <img className={HomeStyle.image} src="/images_home/Rectangle_3.png"></img>
           <div className={HomeStyle.text_container_up}>
-            <h2>Preschool</h2>
+            <h2>Play Group</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget maecenas semper lacus amet. Malesuada faucibus feugiat et integer imperdiet sed. Aliquam scelerisque non netus eget varius viverra non tortor, volutpat. Eu diam convallis nulla ac. Augue nisi, lectus porttitor lectus.</p>
             <button className={HomeStyle.button}>
             <a href="/class#play_group">Learn more
@@ -23,7 +23,7 @@ export default function Home({posts}) {
         <hr className={HomeStyle.line}></hr>
         <div className={HomeStyle.container_down}>
           <div className={HomeStyle.text_container_down}>
-            <h2>Preschool</h2>
+            <h2>Nursery 1</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget maecenas semper lacus amet. Malesuada faucibus feugiat et integer imperdiet sed. Aliquam scelerisque non netus eget varius viverra non tortor, volutpat. Eu diam convallis nulla ac. Augue nisi, lectus porttitor lectus.</p>
             <button className={HomeStyle.button}>
               <a href="/class#nursery_1">Learn more</a></button>
