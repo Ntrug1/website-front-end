@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 
 const options = {
+  theme: 'light',
   providers: [
     Providers.Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -29,6 +30,15 @@ const options = {
         token.id = data.user.id;
       }
       return Promise.resolve(token);
+    },
+    async signIn(user, account, profile) {
+      if (account.provider === 'google' &&
+          profile.verified_email === true &&
+          profile.email.endsWith('@st.usth.edu.vn')) {
+        return true
+      } else {
+        return false
+      }
     },
   },
 };

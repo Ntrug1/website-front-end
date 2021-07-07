@@ -18,7 +18,7 @@ const IndexPage = ({
           <button className={Style.button} 
             onClick={(e) => {
               e.preventDefault();
-              signIn();
+              signIn('google');
             }}
           >
             Sign In
