@@ -10,7 +10,7 @@ export default function Card({post}){
   return (
     <Link href="/posts/[slug]" as={`/posts/${post.Slug}`}>
     <div className={styled.card}>
-      {post.Image && (
+      {post.Image[0] && (
         <img className={styled.image} src={post.Image[0].url}/>
       )}
       <div className={styled.body}>

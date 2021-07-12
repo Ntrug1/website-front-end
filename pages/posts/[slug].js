@@ -28,7 +28,7 @@ export default function Post({post}){
       <h2 className={Style.h2}>{post.Title}</h2>
       <div className={Style.content}>
         <p dangerouslySetInnerHTML={{ __html: post.Content}}></p>
-        {post.Image && (
+        {post.Image[0] && (
           <img className={Style.image} src={post.Image[0].url}/>
         )}
       </div>
@@ -38,7 +38,6 @@ export default function Post({post}){
 }
 
 //* fetch data
-//* test new fetching:
 
 const {publicRuntimeConfig} = getConfig()
 
