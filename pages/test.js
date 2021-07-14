@@ -3,15 +3,17 @@ import Head from 'next/head';
 import Link from "next/link";
 import React from "react";
 import Style from '../styles/Login.module.css'
-// import AddPosts from "../components/add-post/add";
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-
+import Modal from "../components/Modal/Modal";
+import ImageUpload from "../components/ImageUpload/ImageUpload";
+import Image from 'next/image'
 
 const IndexPage = ({
   session,
+  posts
 }) => {
   const signInButtonNode = () => {
     if (session) {
@@ -42,7 +44,7 @@ const IndexPage = ({
     return (
       <div>
         <Link href="/api/auth/signout">
-          <button className={Style.button} 
+          <button className={Style.add_button} 
             onClick={(e) => {
               e.preventDefault();
               signOut();
@@ -74,6 +76,12 @@ const IndexPage = ({
     Title: "",
     Content: "",
   })
+
+  //* need to be check (this part is for upload image)
+
+  const [imagePreview, setImagePreview] = useState(null)
+
+  const [showModal, setShowModal] = useState(false);
 
   const {Title, Content} = values;
 
@@ -107,6 +115,13 @@ const IndexPage = ({
     }
   };
   
+  const ImageUploaded = async (e) => {
+    const { API_URL } = process.env
+    const res = await fetch(`${API_URL}/posts`);
+    const data = await res.json();
+    // setImagePreview(ImageUploaded)
+    setShowModal(false)
+  }
 
   const handleInputChange = (e) => {
     const {name, value} = e.target;
@@ -119,40 +134,18 @@ const IndexPage = ({
       <Head>
         <title>Add Post</title>
       </Head>
-      <div className={Style.align}>
-        {/* <AddPosts/> */}
-        {/* <h2 className={Style.h2}>Add Post</h2>
-        <table>
-          <tr>
-            <th>Title:</th>
-            <th><input className={Style.input} type="text" /></th>
-            <th></th>
-            <th></th>
-          </tr>
-          <tr>
-            <td className={Style.content}>Content:</td>
-            <td><textarea className={Style.input_content} type="text" />
-            </td>
-            <td className={Style.content}>Image:</td>
-            <td><input  type="file" /></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td><button className={Style.add_button}  type="button">Add Post</button></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </table> */}
-        <div>
-            {signOutButtonNode()}
-            {signInButtonNode()}
-        </div>
-        <h2 className={Style.h2}>Add Posts</h2>
+      <div className={Style.head}>
+      <h2>Add Posts</h2>
+      <div>
+        {signOutButtonNode()}
+        {signInButtonNode()}
+      </div>
+      </div>
       <ToastContainer/>
       <form onSubmit={handleSubmit} >
-        <div >
-          <div>
-            <label htmlFor="Title">Title</label>
+        <div className={Style.grid}>
+          <div className={Style.grid_items}>
+            <label htmlFor="Title">Title:</label>
             <input
             className={Style.input} 
             name="Title" 
@@ -162,8 +155,8 @@ const IndexPage = ({
             onChange={handleInputChange}
             />
           </div>
-          <div>
-            <label htmlFor="Content">Content</label>
+          <div className={Style.grid_items}>
+            <label htmlFor="Content">Content:</label>
             <textarea
             className={Style.input_content}
             name="Content" 
@@ -174,9 +167,21 @@ const IndexPage = ({
             />
           </div>
         </div>
-        <input className={Style.add_button} type="submit" value="Add Posts"/>
+        <input className={Style.add_button} type="submit" value="Add Posts"/>  
       </form>
+      {imagePreview ? (
+        <Image src={imagePreview} height={200} width={250}/>
+      ):(
+        <div>
+          <p>No Image Available</p>
+        </div>
+      )}
+      <div>
+        <button onClick={() => setShowModal(true)} className={Style.button}>Upload Image</button>
       </div>
+      <Modal show={showModal} onClose={() => setShowModal(false)}>
+        <ImageUpload ImageUploaded={ImageUploaded}/>
+      </Modal>
     </div>
   );
 };
