@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { useRouter } from 'next/router';
 export default function Enrollment(){
 
   const [values, setValues] = useState({
@@ -23,6 +24,7 @@ export default function Enrollment(){
     console.log(value)
   }
 
+  let router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const emptyFieldCheck = Object.values(values).some(
@@ -44,7 +46,9 @@ export default function Enrollment(){
     if(!res.ok) {
       toast.error("Something went wrong")
     } else {
-      
+      if(confirm("You have uploaded the form")){
+       router.reload()
+      }
     } 
   }
 
@@ -56,7 +60,7 @@ export default function Enrollment(){
       <img className={EnrollmentStyle.img} src="/images_enrollment/Rectangle 2.png"></img>
       <h1 className={EnrollmentStyle.h1}>ADMISSION FORM</h1>
       <ToastContainer/>
-      <form onSubmit={handleSubmit} className={EnrollmentStyle.form}>
+      <form id="form" onSubmit={handleSubmit} className={EnrollmentStyle.form}>
         <div className={EnrollmentStyle.grid}>
           <div>
           <label htmlFor="Name">Name</label>
@@ -135,5 +139,3 @@ export default function Enrollment(){
     </div>
   )
 }
-
-//*finish the crud for the enrollment form
