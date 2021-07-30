@@ -3,17 +3,14 @@ import Head from 'next/head';
 import Link from "next/link";
 import React from "react";
 import Style from '../styles/Login.module.css'
-import { useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import Modal from "../components/Modal/Modal";
-import ImageUpload from "../components/ImageUpload/ImageUpload";
-import Image from 'next/image'
-
+import { ST } from "next/dist/next-server/lib/utils";
 const IndexPage = ({
   session,
-  posts
+  post
 }) => {
   const signInButtonNode = () => {
     if (session) {
@@ -72,22 +69,25 @@ const IndexPage = ({
     )
   }
 
+  //* define values for text upload
   const [values, setValues] = useState({
     Title: "",
     Content: "",
   })
 
-  //* need to be check (this part is for upload image)
-
-  const [imagePreview, setImagePreview] = useState(null)
-
-  const [showModal, setShowModal] = useState(false);
-
   const {Title, Content} = values;
 
+  //* define value for image upload
+  const [imagePreview, setImagePreview] = useState();
+
+  const [Image, setImage] = useState();
+
   let router = useRouter();
+
+  //*Upload form logic
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     const emptyFieldCheck = Object.values(values).some(
       (element) => element === "");
 
@@ -102,7 +102,7 @@ const IndexPage = ({
         "Authorization": `Bearer ${session.jwt}`,
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(values),
+      body: JSON.stringify(values, Image),
     });
   
     if(!res.ok) {
@@ -110,24 +110,60 @@ const IndexPage = ({
     } else if(emptyFieldCheck) {
       return false;
     } else {
-      const post = await res.json();
+       const post = await res.json();
+      // console.log(post.id)
+      const postID = post.id
+      await ImageUpload(postID)
       router.push(` /posts/${post.Slug}`);
     }
   };
   
-  const ImageUploaded = async (e) => {
-    const { API_URL } = process.env
-    const res = await fetch(`${API_URL}/posts`);
-    const data = await res.json();
-    // setImagePreview(ImageUploaded)
-    setShowModal(false)
+  //*Image upload logic
+  const ImageUpload = async (ID) => {
+    const post = ID
+    console.log(post)
+    const formData = new FormData()
+    formData.append("files", Image)
+    formData.append("ref", "posts")
+    formData.append("refId", post)
+    formData.append("field", "Image")
+
+    const {API_URL} = process.env
+    const res = await fetch(`${API_URL}/upload`, {
+      method: "POST",
+      body: formData,
+    });
+
+    const res2 = await res.json()
+    console.log(res2)
+    return res2
   }
 
+  //*text input handler
   const handleInputChange = (e) => {
     const {name, value} = e.target;
     setValues({ ...values, [name]: value});
     console.log(name)
   };
+
+  //* Image preview
+  useEffect(() => {
+    if (Image) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setImagePreview(reader.result)
+      }
+      reader.readAsDataURL(Image)
+    }else{
+      setImagePreview(null)
+    }
+  }, [Image])
+
+  //* Image upload handler
+  const handleFileChange = (e) => {
+    setImage(e.target.files[0])
+    console.log(e.target.files[0])
+  }
 
   return (
     <div className={Style.container}>
@@ -167,21 +203,19 @@ const IndexPage = ({
             />
           </div>
         </div>
+        <h4>Upload Image here:</h4>
+        {imagePreview ? (
+          <img src={imagePreview} className={Style.imagePreview}/>
+        ):(
+          <label className={Style.imageUpload}>
+              <input className={Style.image_upload_button} accept="image/*" type="file" onChange={handleFileChange}/>
+              <img className={Style.upload_icon} src="/fa-solid_upload.png"></img>
+              <p>Upload Image here</p>
+          </label>
+        )}
+        <br/>
         <input className={Style.add_button} type="submit" value="Add Posts"/>  
       </form>
-      {imagePreview ? (
-        <Image src={imagePreview} height={200} width={250}/>
-      ):(
-        <div>
-          <p>No Image Available</p>
-        </div>
-      )}
-      <div>
-        <button onClick={() => setShowModal(true)} className={Style.button}>Upload Image</button>
-      </div>
-      <Modal show={showModal} onClose={() => setShowModal(false)}>
-        <ImageUpload ImageUploaded={ImageUploaded}/>
-      </Modal>
     </div>
   );
 };
