@@ -7,7 +7,6 @@ import { useRef, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { ST } from "next/dist/next-server/lib/utils";
 const IndexPage = ({
   session,
   post
